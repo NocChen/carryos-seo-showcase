@@ -5,6 +5,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { SlideOutCart } from '@/components/SlideOutCart'
 import { LanguageProvider } from '@/components/LanguageProvider'
+import { Analytics } from '@vercel/analytics/next'
 
 export const metadata: Metadata = {
   title: 'CARRYOS — Curated Tech EDC',
@@ -27,6 +28,7 @@ export default function RootLayout({
             <SlideOutCart />
           </CartProvider>
         </LanguageProvider>
+        <Analytics />
       </body>
     </html>
   )
