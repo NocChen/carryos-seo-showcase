@@ -3,9 +3,9 @@ import { getProductBySlug, products } from '@/lib/products'
 import ProductClient from './ProductClient'
 import Link from 'next/link'
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  // Extract slug - In Next.js 15, params is often treated as a Promise, but let's stick to standard behavior
-  const { slug } = await Promise.resolve(params); // Await params to be safe for modern nextjs
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  // Extract slug - In Next.js 15+, params is a Promise
+  const { slug } = await params;
   const product = getProductBySlug(slug)
   if (!product) return { title: 'Product Not Found | CARRYOS' }
 
@@ -34,8 +34,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = await Promise.resolve(params);
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const product = getProductBySlug(slug)
   
   if (!product) {

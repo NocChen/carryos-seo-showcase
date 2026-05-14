@@ -117,7 +117,7 @@ export default function ProductClient({ product, related }: { product: any, rela
             <div className="space-y-3">
               <h3 className="text-xs font-semibold uppercase tracking-widest text-text-muted">Materials</h3>
               <div className="flex flex-wrap gap-2">
-                {product.materials.map((m) => (
+                {product.materials.map((m: string) => (
                   <span
                     key={m}
                     className="rounded-full border border-accent/30 bg-accent/5 px-3 py-1 font-mono text-[10px] text-accent"
@@ -131,7 +131,7 @@ export default function ProductClient({ product, related }: { product: any, rela
             <div className="space-y-3">
               <h3 className="text-xs font-semibold uppercase tracking-widest text-text-muted">Features</h3>
               <ul className="space-y-2">
-                {product.features.map((f) => (
+                {product.features.map((f: string) => (
                   <li key={f} className="flex items-start gap-2 text-sm text-text-secondary">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-accent">
                       <polyline points="20 6 9 17 4 12" />
@@ -184,7 +184,7 @@ export default function ProductClient({ product, related }: { product: any, rela
               <p className="text-sm text-text-secondary">More from {product.category}</p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((p) => (
+              {related.map((p: any) => (
                 <ProductCard key={p.id} product={p} />
               ))}
             </div>
