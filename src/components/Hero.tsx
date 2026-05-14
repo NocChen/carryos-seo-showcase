@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import Link from 'next/link'
 import { useLanguage } from '@/components/LanguageProvider'
 
 export function Hero() {
@@ -105,7 +106,7 @@ export function Hero() {
         </p>
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
+          <Link
             href="/resume"
             className="inline-flex h-12 items-center gap-2 rounded-full bg-accent px-8 text-sm font-semibold text-black transition-all hover:bg-accent/90 hover:shadow-[0_0_30px_-5px_var(--color-accent)]"
           >
@@ -114,13 +115,13 @@ export function Hero() {
               <line x1="5" y1="12" x2="19" y2="12" />
               <polyline points="12 5 19 12 12 19" />
             </svg>
-          </a>
-          <a
+          </Link>
+          <Link
             href="#categories"
             className="inline-flex h-12 items-center rounded-full border border-border px-8 text-sm font-medium text-text-secondary transition-all hover:border-text-muted hover:text-text-primary"
           >
             {t('browseUseCase')}
-          </a>
+          </Link>
         </div>
       </div>
 
