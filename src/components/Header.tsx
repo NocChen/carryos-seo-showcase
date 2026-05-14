@@ -4,17 +4,21 @@ import Link from 'next/link'
 import { useCart } from '@/hooks/useCart'
 import { useRouter } from 'next/navigation'
 import { useLanguage } from '@/components/LanguageProvider'
+import { useState } from 'react'
 
 export function Header() {
   const { itemCount, openCart } = useCart()
   const router = useRouter()
   const { language, setLanguage, t } = useLanguage()
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   const handleNav = (category: string) => {
     if (window.location.pathname !== '/') {
+      setIsMobileMenuOpen(false)
       router.push(`/?category=${category}`)
       return
     }
+    setIsMobileMenuOpen(false)
     router.push(`/?category=${category}`, { scroll: false })
     setTimeout(() => {
       document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })
@@ -86,8 +90,62 @@ export function Header() {
               </span>
             )}
           </button>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden flex items-center justify-center p-2 text-text-secondary transition-colors hover:text-text-primary"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              {isMobileMenuOpen ? (
+                <>
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </>
+              ) : (
+                <>
+                  <line x1="3" y1="12" x2="21" y2="12" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                  <line x1="3" y1="18" x2="21" y2="18" />
+                </>
+              )}
+            </svg>
+          </button>
         </div>
       </div>
+
+      {/* Mobile Navigation Dropdown */}
+      {isMobileMenuOpen && (
+        <nav className="md:hidden border-t border-border bg-surface-1/95 backdrop-blur-xl">
+          <div className="flex flex-col px-6 py-4 space-y-4">
+            <Link 
+              href="/seo-showcase" 
+              className="text-sm font-medium text-accent"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {t('seoShowcase')}
+            </Link>
+            <button
+              onClick={() => handleNav('power')}
+              className="text-left text-sm font-medium text-text-secondary"
+            >
+              {t('power')}
+            </button>
+            <button
+              onClick={() => handleNav('carry')}
+              className="text-left text-sm font-medium text-text-secondary"
+            >
+              {t('carry')}
+            </button>
+            <button
+              onClick={() => handleNav('utility')}
+              className="text-left text-sm font-medium text-text-secondary"
+            >
+              {t('utility')}
+            </button>
+          </div>
+        </nav>
+      )}
     </header>
   )
 }
