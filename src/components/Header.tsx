@@ -41,6 +41,9 @@ export function Header() {
           <Link href="/seo-showcase" className="text-sm font-medium text-accent transition-colors hover:text-accent/80">
             {t('seoShowcase')}
           </Link>
+          <Link href="/resume" className="text-sm font-medium text-text-secondary transition-colors hover:text-text-primary">
+            {t('resume')}
+          </Link>
           <button
             onClick={() => handleNav('power')}
             className="text-sm font-medium text-text-secondary transition-colors hover:text-text-primary"
@@ -98,16 +101,16 @@ export function Header() {
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               {isMobileMenuOpen ? (
-                <>
+                <g>
                   <line x1="18" y1="6" x2="6" y2="18" />
                   <line x1="6" y1="6" x2="18" y2="18" />
-                </>
+                </g>
               ) : (
-                <>
+                <g>
                   <line x1="3" y1="12" x2="21" y2="12" />
                   <line x1="3" y1="6" x2="21" y2="6" />
                   <line x1="3" y1="18" x2="21" y2="18" />
-                </>
+                </g>
               )}
             </svg>
           </button>
@@ -124,6 +127,13 @@ export function Header() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               {t('seoShowcase')}
+            </Link>
+            <Link 
+              href="/resume" 
+              className="text-sm font-medium text-text-secondary"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {t('resume')}
             </Link>
             <button
               onClick={() => handleNav('power')}

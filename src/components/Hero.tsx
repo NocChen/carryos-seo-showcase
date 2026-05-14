@@ -106,7 +106,7 @@ export function Hero() {
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
-            href="#products"
+            href="/resume"
             className="inline-flex h-12 items-center gap-2 rounded-full bg-accent px-8 text-sm font-semibold text-black transition-all hover:bg-accent/90 hover:shadow-[0_0_30px_-5px_var(--color-accent)]"
           >
             {t('exploreGrid')}

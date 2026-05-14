@@ -22,6 +22,7 @@ const translations = {
     shipping: 'Shipping & Returns',
     warranty: 'Warranty',
     contact: 'Contact',
+    resume: 'Resume',
     createdBy: 'Created by',
     wechat: 'WeChat',
     all: 'All',
@@ -36,12 +37,12 @@ const translations = {
     clearFilters: 'Clear filters',
     
     // Hero
-    newDrop: 'New Drop — Spring 2026',
-    yourPocket: 'Your Pocket, ',
-    upgraded: 'Upgraded',
-    heroDesc: 'Curated tech EDC gear for the modern carry enthusiast. Power. Minimalism. Utility. Engineered.',
-    exploreGrid: 'Explore the Grid',
-    browseUseCase: 'Browse by Use-Case',
+    newDrop: 'Hazel (NocChen) — 2026 Portfolio',
+    yourPocket: 'AI Automation & ',
+    upgraded: 'SEO Expert',
+    heroDesc: 'This site is a fully functional Next.js e-commerce demo built to showcase my technical SEO, AI workflow automation, and cross-platform operations capabilities.',
+    exploreGrid: 'View My Resume',
+    browseUseCase: 'Explore Tech Demo',
 
     // Blog Generator
     aiContentGen: 'AI Content Clustering Generator',
@@ -131,6 +132,7 @@ const translations = {
     shipping: '运输与退货',
     warranty: '保修',
     contact: '联系我们',
+    resume: '个人简历',
     createdBy: '创建者',
     wechat: '微信',
     all: '全部',
@@ -145,12 +147,12 @@ const translations = {
     clearFilters: '清除过滤器',
 
     // Hero
-    newDrop: '新品发布 — 2026 春季',
-    yourPocket: '你的口袋，',
-    upgraded: '全面升级',
-    heroDesc: '为现代 EDC 爱好者精心挑选的科技装备。强大、极简、实用、精工制造。',
-    exploreGrid: '探索产品',
-    browseUseCase: '按场景浏览',
+    newDrop: 'Hazel (NocChen) — 2026 作品集',
+    yourPocket: 'AI 自动化与 ',
+    upgraded: 'SEO 专家',
+    heroDesc: '这是一个功能完备的 Next.js 电商演示网站，专为展示我的技术 SEO、AI 工作流自动化以及跨平台运营能力而构建。',
+    exploreGrid: '查看我的简历',
+    browseUseCase: '探索技术演示',
 
     // Blog Generator
     aiContentGen: 'AI 内容聚类生成器',
@@ -236,13 +238,12 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguage] = useState<Language>('en')
 
-  const [mounted, setMounted] = useState(false)
   useEffect(() => {
     const savedLang = localStorage.getItem('carryos-lang') as Language
     if (savedLang && (savedLang === 'en' || savedLang === 'zh')) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLanguage(savedLang)
     }
-    setMounted(true)
   }, [])
 
   const handleSetLanguage = (lang: Language) => {
@@ -251,12 +252,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }
 
   const t = (key: string) => {
-    // @ts-ignore
+    // @ts-expect-error - key type is dynamic
     return translations[language][key] || key
-  }
-
-  if (!mounted) {
-    return <>{children}</>
   }
 
   return (
@@ -273,7 +270,7 @@ export function useLanguage() {
       language: 'en' as Language,
       setLanguage: () => {},
       t: (key: string) => {
-        // @ts-ignore
+        // @ts-expect-error - key type is dynamic
         return translations['en'][key] || key
       }
     }
